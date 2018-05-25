@@ -1,0 +1,31 @@
+
+\section{Introduction}
+\label{sec:introduction}
+\noindent
+\enquote{A major limiting factor to the widespread use of information visualization is the difficulty of labeling information abundant displays}~\cite{Fekete1999}.
+This assessment of Fekete and Plaisant is as tenable today as it was in 1999.
+Most of today's visualizations are still troubled by missing labels, leading to one-by-one assessment of graphical elements, overlapping labels obscuring depicted data, and ambiguous association of labels to graphical elements.
+Even recent advances in big-data visualization have not managed to resolve these well-known labeling issues, despite their tremendous potential for increasing the visualization quality. 
+
+We suppose there are at least two reasons for labeling to remain mostly unattended in real-time computer graphics.
+First, high-quality text rendering and placement is an intricate task, especially in 3D. 
+It starts with text rendering itself requiring lots of implementation and use-case specific tweaking and probably ends with having no text rendering support in any of the latest rendering APIs, be it OpenGL~\cite{opengl}, WebGL~\cite{webgl}, or Vulkan~\cite{vulkan}.
+In research, this means lots of available resources ought to be allocated for prototype development rather than novelty and evaluation.
+Second, other industries, like the gaming industry usually get along with basic (bitmap based) text rendering.
+With a few exceptions (e.g., \emph{Tom Clancy's The Division}, developed by Massive Entertainment and published by Ubisoft in 2016, shows impressive dynamic labeling in its UI and world map), high-end labeling is attributed to artistic rather than programming efforts and is the result of tweaking and pre-computing assets in compliance with a title's art direction.
+Furthermore, the number of labels is typically much smaller and sophisticated placement requirements are not present. 
+Accordingly no industry seems to drive the progression or standardization of labeling technology in general.
+
+In order to initiate a research driven specification of an open label library, we (1) put our idea of a unified labeling API forward for discussion, and (2) propose subsequent steps required for a widespread use in information visualization.
+To this extent, the following contributions are made: %
+\begin{itemize}
+	\item a brief introduction to and overview of existing text rendering approaches and systems is provided,
+	\item snippets of the labeling API \emph{OpenLL}, derived from use cases of our research group, are presented, and
+	\item our ongoing open-source implementation efforts for mobile and desktop applications are described.
+\end{itemize}
+
+\smallskip
+\noindent
+OpenLL is designed to complement existing rendering APIs, systems, and transmission formats (such as glTF~\cite{gltf}).
+It facilitates a descriptive labeling approach using label and proxy objects that are processed by means of renderers that are aligned to implementation specifics of hardware-accelerated text rendering techniques.
+Thus, this paper provides the general concepts of OpenLL instead of drafting an extension to any rendering API or transmission format.

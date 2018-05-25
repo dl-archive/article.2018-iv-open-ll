@@ -1,0 +1,102 @@
+
+
+\documentclass[10pt, conference, compsocconf]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[american]{babel} 
+
+\usepackage{graphicx}
+\usepackage{float}
+
+\graphicspath{{figures/}}
+\DeclareGraphicsExtensions{.pdf,.PDF,.png,.PNG}  
+
+\let\labelindent\relax
+\usepackage{enumitem}
+
+\usepackage{csquotes}
+\usepackage{xcolor} 
+\usepackage{csquotes}
+
+\usepackage[draft]{hyperref}
+
+\ifCLASSINFOpdf
+\else
+\fi
+
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\figureautorefname}{Fig.}
+
+\definecolor{cardinal}{rgb}{0.77, 0.12, 0.23}
+\newcommand{\redify}[1]{\textcolor{cardinal}{#1}}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\newcommand{\blueify}[1]{\textcolor{cobalt}{#1}}
+
+\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textbf{#1} |}
+
+\input{lstset-typescript}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\makeatletter
+\g@addto@macro\@maketitle{
+    \vspace{-1\baselineskip}
+    \vspace{1.6\baselineskip}
+    \begin{figure}[H]
+        \setlength{\linewidth}{\textwidth}
+        \setlength{\hsize}{\textwidth}
+        \includegraphics[width=\textwidth]{teaser2}
+        \caption{fltr, a data visualization using interactive annotation, a synthetic scene showcasing automatic label placement, a benchmark for point-feature label placement, and a circular bundle view using labeling with adaptive level-of-detail, automated label orientation as well as text-alignment along B-splines.}
+        \label{fig:teaser}
+    \end{figure}
+}
+\makeatother
+
+\begin{document}
+\title{OpenLL: an API for Dynamic 2D and 3D Labeling}
+
+\author{\IEEEauthorblockN{Daniel Limberger\IEEEauthorrefmark{1}, Anne Gropler, Stefan Buschmann, and J{\"u}rgen D{\"o}llner\IEEEauthorrefmark{2}}
+\IEEEauthorblockA{Hasso Plattner Institute, University of Potsdam\\
+Potsdam, Germany\\
+Email: \{daniel.limberger\IEEEauthorrefmark{1}, juergen.doellner\IEEEauthorrefmark{2}\}@hpi.de}
+\and
+\IEEEauthorblockN{Benjamin Wasty\IEEEauthorrefmark{3}}
+\IEEEauthorblockA{Seerene\\
+Potsdam, Germany\\
+Email: benjamin.wasty@seerene.com\IEEEauthorrefmark{3}}
+}
+
+\maketitle
+
+\begin{abstract}
+  Today's rendering APIs lack robust functionality and capabilities for dynamic, real-time text rendering and labeling, which represent key requirements for 3D application design in many fields.
+  As a consequence, most rendering systems are barely or not at all equipped with respective capabilities.
+  This paper drafts the unified text rendering and labeling API OpenLL intended to complement common rendering APIs, frameworks, and transmission formats.
+  For it, various uses of static and dynamic placement of labels are showcased and a text interaction technique is presented.
+  Furthermore, API design constraints with respect to state-of-the-art text rendering techniques are discussed.
+  This contribution is intended to initiate a community-driven specification of a free and \emph{open label library}.
+\end{abstract}
+
+\begin{IEEEkeywords}
+visualization, labeling, real-time rendering
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\input{1-introduction}
+\input{2-related}
+\input{3-model}
+\input{4-api}
+\input{5-openll} 
+\input{6-conclusion}
+
+\section*{Acknowledgment}
+\noindent
+The authors would like to thank Daniel Gimbatschki and Simon Krogman for their valuable API design and implementation contributions.
+This work was funded by the German Federal Ministry of Education and Research (BMBF) within the BIMAP project (\url{https://www.bimap-project.de}).
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}  
+
+\end{document}
+

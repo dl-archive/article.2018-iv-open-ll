@@ -1,0 +1,52 @@
+
+\section{Labeling Model}
+\label{sec:model}
+\noindent
+The core of our labeling API is about management and automated placement of a large number of labels in 2D and 3D in real-time.
+It does not provide implementation specifics, e.g., for computational math, parallelization, or hardware accelerated rendering, nor does it inflict a certain implementation design.
+However, for deriving font handling interfaces and general rendering features it is relevant to account for common limitations of today's rendering approaches.
+Similar to rendering APIs we expose objects and operate on the object relations and states.
+For it, we introduce the following API objects:\medskip
+
+\begin{description}\setlength{\itemsep}{8pt}
+
+	\item [Font Face]
+	The font face describes the resources required for rendering text. This includes, e.g., a list of available glyphs and ligatures, their orientation, advance, weight, and kerning data, their location within a texture map as well as the texture map's encoding, e.g., 16bit floating point SDF samples or 8bit RGBA coverage.
+	We assume all assets to be generated beforehand, but a font family reference could also be used if the OpenLL driver is capable of generating the required assets on the fly. 
+	
+	\item [Text]
+	This object stores the actual text by means of a dynamic sequence of characters or code points.
+	
+	\item [Label]
+	A label combines all data required for typesetting, positioning, orienting, and rendering text.
+	It references a text or an excerpt of a text, a font face and style definition, and describes its specific placement via positions, margins, anchors, proxies, constraints, or auxiliary shapes such as lines, points, etc.
+	It also represents the main extension point for domain specific labeling techniques.
+	
+	\item [Label Cloud]
+	This object can be used for data driven labeling, e.g., when large number of points or objects are selectively labeled based on weights or other label-specific data.
+	For that, the text references, placement and weight data must be provided. 
+	The font face and style definitions are referenced only once, and depending on the cloud's specialization, additional data such as a label selection description, maximum number of labels to be displayed, or no-label regions can be added.
+
+	\item [Proxy]
+	Similar to real-time collision physics, implicit shapes like spheres, cubes, quads, points, lines, or splines can be used to partially approximate detailed 2D and 3D scenes or describe dynamic anchors such as a virtual camera or an area of interest.
+	With this, the computational complexity of label placement and anchoring, especially for more advanced, e.g., constraint-based, adaptive label placement techniques can be reduced.
+	Any Label can then reference a proxy's vertices, edges, or areas as an anchor. 
+	For example, a cuboid proxy could expose each of its corners, edges, center points, or even its lateral surfaces for anchoring. 
+	Proxies also provide the basis for detecting overlapping labels, adapting to proxies occluding labels, or using their extent for level-of-detail control.
+
+	\item [Renderer]
+	The renderer is tasked with configuration, preparation and real-time rendering of a given set of labels or label clouds.
+	There might be various rendering implementations favoring specific text rendering approaches or font assets.
+	OpenLL does not assume any rendering implementation details, and instead provide, if any, generic quality and performance hints, e.g., flags for favoring quality over memory.
+	It is the renderer's responsibility to internally gather data such as a device pixel ratios for correct font size scaling and display sub-pixel layout for sub-pixel anti-aliasing.
+	Finally, the renderer must allow label retrieval via screen space coordinates for user interaction purposes.
+
+\end{description}
+
+\smallskip
+\noindent
+Using these objects, the general approach for rendering labels is as follows: (1) prepare font faces and proxies, (2) instantiate labels or label clouds, (3) configure one or multiple renderer and callbacks, and, finally, (4) update texts and proxies and trigger the rendering on every frame.
+The actual placement of the labels should be triggered by the renderer internally in the following manner:
+all labels and clouds that are about to be rendered are triggered for a lazy update. If any of their properties or referenced objects (font face, proxies, etc.) has changed, all required transformations for placement and rendering are (re)computed and associated geometry (re)submitted for rendering.
+
+Overall, this design facilitates a community driven standardization of 2D and 3D labeling by means of extensions, facades, or new libraries, and thus promotes the use of existing text rendering engines, e.g., \emph{glyphy}~\cite{Esfahbod2011}, \emph{freetype-gl}~\cite{freetypegl2011}, \emph{FreeType}~\cite{freetype1996}, or even native frameworks.  
