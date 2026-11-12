@@ -4,7 +4,7 @@
 
 *22nd International Conference Information Visualisation (IV '18)*, July 10–13, 2018, Fisciano, Italy. IEEE, pp. 175–181.
 
-DOI: [10.1109/iV.2018.00039](https://doi.org/10.1109/iV.2018.00039) · Author's version: Zenodo · [ResearchGate](https://www.researchgate.net/publication/327017928)
+DOI: [10.1109/iV.2018.00039](https://doi.org/10.1109/iV.2018.00039) · Author's version: [Zenodo](https://doi.org/10.5281/zenodo.24176588) · [ResearchGate](https://www.researchgate.net/publication/327017928)
 
 Implementation: [cginternals/openll](https://github.com/cginternals/openll) (API specification, reference implementations) · [cginternals/openll-cpp](https://github.com/cginternals/openll-cpp) (C++ implementation)
 
