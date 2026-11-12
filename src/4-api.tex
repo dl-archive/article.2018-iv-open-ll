@@ -2,7 +2,7 @@
 \section{Labeling API}
 \label{sec:api}
 \noindent
-This section discusses the labeling API by examples derived from use cases in the fields of Geovisualization and Software visualization. The examples are in pseudocode, but the syntax is inspired by TypeScript for readability.
+This section discusses the labeling API by examples derived from use cases in the fields of geovisualization and software visualization. The examples are in pseudocode, but the syntax is inspired by TypeScript for readability.
 
 \subsection{Basic Label Placement in 2D}
 \noindent
@@ -32,7 +32,7 @@ This allows, e.g., for labeling proxy objects such as faces of a bounding box:
 	\label{fig:legends}
 \end{figure}
 \noindent
-This is a basic example of static label placement in 3D space. Contrary to 2D space, we cannot use pixel or point as a unit for font size and positioning, since the actual size of a label depends on its position and the position of the camera. Thus there is no purpose in using any unit other that world space coordinates for font size and positioning:
+This is a basic example of static label placement in 3D space. Contrary to 2D space, we cannot use pixel or point as a unit for font size and positioning, since the actual size of a label depends on its position and the position of the camera. Thus, there is no purpose in using any unit other than world-space coordinates for font size and positioning:
 
 \lstinputlisting[language = TypeScript, label = lst:position3d]{listings/position3d.js}
 
@@ -57,14 +57,14 @@ Projected 3D labels are positioned in 3D space, but projected onto a 2D plane. T
 \end{figure}
 \noindent
 Splines can be useful, e.g., for annotating a 3D-building by wrapping a label around the walls or for labeling a river.
-A spline has several properties: control points, knot values and degree. Two of them must be given for defining the spline, the third can be calculated.
-For every glyph on a spline, the same up vector can be used. However in 3D space, the up vector can also be different for every glyph. In addition to the base spline (that is the baseline in typesetting), a top spline is defined, which is used to calculate an up vector for every glyph. That up vector is defined by the position of the glyph on the base spline and the corresponding position on the top spline:
+A spline has several properties: control points, knot values, and degree. Two of them must be given for defining the spline, the third can be calculated.
+For every glyph on a spline, the same up vector can be used. However, in 3D space, the up vector can also be different for every glyph. In addition to the base spline (that is the baseline in typesetting), a top spline is defined, which is used to calculate an up vector for every glyph. That up vector is defined by the position of the glyph on the base spline and the corresponding position on the top spline:
 
 \lstinputlisting[language = TypeScript, label = lst:spline3d]{listings/spline3d.js}
 
 \subsection{Adaptive Label Placement}
 \noindent
-To maintain readability for rendered glyphs, their placement should adapt to changes of view or occluding geometry. When annotating a point, the label can be placed at different angles; when annotating a line, the label can be written over any part of the line -- to mention a few scenarios. We address those issues with two examples, based on uses cases in Treemap-based software visualizations:\medskip
+To maintain readability for rendered glyphs, their placement should adapt to changes of view or occluding geometry. When annotating a point, the label can be placed at different angles; when annotating a line, the label can be written over any part of the line -- to mention a few scenarios. We address those issues with two examples, based on use cases in treemap-based software visualizations:\medskip
 
 \subsubsection{Adaptive Label Placement in Screen Space}
 \noindent
@@ -83,11 +83,11 @@ The first example shows an external label in screen space. It uses a line in wor
 	\label{fig:boxRef}
 \end{figure}
 \noindent
-The second example uses a proxy in form of a box. Different surfaces of the box are usable for the label's position. It also possible to change the direction and up vector of the label accordingly. At this point, a smart placement algorithm can be interposed to calculate the label's placement taking into account the proxy geometry, the current view, or occluding geometry:
+The second example uses a proxy in the form of a box. Different surfaces of the box are usable for the label's position. It also is possible to change the direction and up vector of the label accordingly. At this point, a smart placement algorithm can be interposed to calculate the label's placement taking into account the proxy geometry, the current view, or occluding geometry:
 
 \lstinputlisting[language = TypeScript, label = lst:proxygeom3d]{listings/proxygeom3d.js}
 
-\subsection{Labeling with Level Of Detail} 
+\subsection{Labeling with Level of Detail} 
 \begin{figure}[h]
 	\vspace*{-0.75\baselineskip}
 	\includegraphics[width=\linewidth]{labeling-cloud-lod}
@@ -95,7 +95,7 @@ The second example uses a proxy in form of a box. Different surfaces of the box 
 	\label{fig:cloud}
 \end{figure}
 \noindent
-When rendering a large amount of labels, the view is easily cluttered and labels overlap or occlude other objects. To prevent that, it is possible to choose a subset of all labels based on certain constraints, e.g., only the 20 most important labels (criterion: label priority or weight), a minimum font size (view-based in 3D), or only certain semantic groups that can have precedence for visual display over other groups.
+When rendering a large number of labels, the view is easily cluttered and labels overlap or occlude other objects. To prevent that, it is possible to choose a subset of all labels based on certain constraints, e.g., only the 20 most important labels (criterion: label priority or weight), a minimum font size (view-based in 3D), or only certain semantic groups that can have precedence for visual display over other groups.
 
 The following example shows how to define such a label cloud, where multiple labels with the same positioning and stylization properties are gathered. Constraints of different types are added that are evaluated before the labels are rendered:
 

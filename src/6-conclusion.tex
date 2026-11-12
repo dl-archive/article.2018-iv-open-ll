@@ -1,12 +1,12 @@
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
 \noindent
-In this paper we presented a draft for an open label library, \emph{OpenLL}, an API that is designed to complement existing rendering APIs, frameworks, and transmission formats.
-To this end the API provides key objects, i.e., proxies and labels, for configuration and management of labels in 2D and 3D in real-time.
+In this paper, we presented a draft for an open label library, \emph{OpenLL}, an API that is designed to complement existing rendering APIs, frameworks, and transmission formats.
+To this end, the API provides key objects, i.e., proxies and labels, for configuration and management of labels in 2D and 3D in real-time.
 Proxies can be used to approximate a virtual scene and provide various anchors that are then referenced by labels for placement.
 The label itself provides (1) a detailed description of the font face and the actual text for rendering, and (2) the API's main extension point for various types of label placement techniques.
-In order to facilitate adoption and community feedback, the API design does not limit the text rendering driver to a specific set of techniques, even though the OpenLL is intended to be used in interactive rendering applications.
-Our free and open-source resources~\cite{openll2018}, as partially presented, comprises (1) two reference implementations of the depicted API examples using WebGL and OpenGL and (2) a cross-platform font asset generator.
+In order to facilitate adoption and community feedback, the API design does not limit the text rendering driver to a specific set of techniques, even though OpenLL is intended to be used in interactive rendering applications.
+Our free and open-source resources~\cite{openll2018}, as partially presented, comprise (1) two reference implementations of the depicted API examples using WebGL and OpenGL and (2) a cross-platform font asset generator.
 
 Both our implementations currently do not support ligatures, composite code points, or more sophisticated typesetting. 
 Furthermore, we would like OpenLL to support extruded 3D text (as in \emph{three.js}) and CSS-like stylization options (gradient, outlines, glow, drop shadows, and more).

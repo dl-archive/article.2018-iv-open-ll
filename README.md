@@ -33,10 +33,21 @@ Implementation: [cginternals/openll](https://github.com/cginternals/openll) (API
 
 `IEEEtran.cls` (V1.7a) is bundled in `src/` and takes precedence over the TeX Live version.
 `limberger2018-openll-as-submitted.pdf` was built with pdfTeX 1.40.18 (TeX Live 2017); the build reproduces it pixel-identically.
+On `main`, the build produces the revised version (`v1.1-revised`). Check out `v1.0-camera-ready` to reproduce `limberger2018-openll-as-submitted.pdf`.
 
 ## Versions
 
 - [`v1.0-camera-ready`](https://github.com/dl-archive/article.2018-iv-open-ll/tree/v1.0-camera-ready) – sources as submitted to IEEE
+- [`v1.1-revised`](https://github.com/dl-archive/article.2018-iv-open-ll/tree/v1.1-revised) – author's revised version (2026-11-12): spelling and grammar fixes, see [Revisions](#revisions)
+
+## Revisions
+
+`v1.1-revised` (2026-11-12) corrects errors in the camera-ready version without changing its content or layout (same page and column breaks).
+Every page carries the note "Author's revised version (2026-11-12). Version of record: https://doi.org/10.1109/iV.2018.00039".
+
+- Spelling: "bilinearly", "supersampled", "monospace", "eligibility", "labeling" (was "labling"), "focusing", "HTML", "Krogmann" (acknowledgment).
+- Grammar and word choice: "like the gaming industry, usually", "Accordingly, no industry", "To this end" (was "To this extent"), "were recently considered", "introduction to and overview of", "w.r.t. the referenced", "temporal coherence", "impose" (was "inflict"), "a large number of", "Any label", "provides", "device pixel ratios", "renderers", "other than", "Thus, ", "However, in 3D space", "use cases in treemap-based", "in the form of", "It also is possible", "Level of Detail", "a large number of labels", "widespread", "examples of", "graphics rendering APIs", "laying out", "In this paper, ", "To this end, ", "even though OpenLL", "comprise".
+- Hyphenation and units: use-case-specific, bitmap-based, research-driven, two- and three-dimensional, hardware-accelerated, problem- and computation-specific, 16-bit floating-point, 8-bit, domain-specific, data-driven, community-driven, world-space, C++-based, well-known, "90\,Hz".
 
 ## Citation
 

@@ -52,6 +52,8 @@
 }
 \makeatother
 
+\usepackage{eso-pic}
+\AddToShipoutPictureFG{\AtPageLowerLeft{\put(\LenToUnit{0.5\paperwidth},\LenToUnit{6mm}){\makebox[0pt][c]{\fontsize{6.5}{8}\selectfont\color{gray}Author's revised version (2026-11-12). Version of record: \url{https://doi.org/10.1109/iV.2018.00039}}}}}
 \begin{document}
 \title{OpenLL: an API for Dynamic 2D and 3D Labeling}
 
@@ -92,7 +94,7 @@ visualization, labeling, real-time rendering
 
 \section*{Acknowledgment}
 \noindent
-The authors would like to thank Daniel Gimbatschki and Simon Krogman for their valuable API design and implementation contributions.
+The authors would like to thank Daniel Gimbatschki and Simon Krogmann for their valuable API design and implementation contributions.
 This work was funded by the German Federal Ministry of Education and Research (BMBF) within the BIMAP project (\url{https://www.bimap-project.de}).
 
 \bibliographystyle{IEEEtran}

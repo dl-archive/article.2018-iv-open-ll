@@ -7,13 +7,13 @@ This section covers related work in the fields of text rendering techniques and 
 \subsection{Text Rendering Techniques}
 \noindent
 With OpenLL we are targeting real-time rendering scenarios in which any additional processing might impact the overall rendering performance or interaction experience.
-This means that rendering hundreds of labels within a virtual reality application at 90Hz or higher, for example, constrains the available processing time for labeling within each frame to at the very most a millisecond. 
+This means that rendering hundreds of labels within a virtual reality application at 90\,Hz or higher, for example, constrains the available processing time for labeling within each frame to at the very most a millisecond. 
 Accordingly, the best practice for increasing real-time rendering performance is often to \enquote{avoid text rendering whenever possible}\footnote{Performance tips for using the canvas: \url{https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas}}.
 To counter this practice, OpenLL is specifically aligned to text rendering techniques that take advantage of texture-mapping graphics hardware by using bitmaps, signed distance fields, and vector maps.
 
 Bitmap font
     rendering is the basis for rendering dynamic text, i.e., text that can change at run-time and cannot be prerendered into a texture. 
-    The text is divided into its elemental symbols (\emph{glyphs}), each represented by a quad and typeset (using additional kerning data or mono space) on the CPU.
+    The text is divided into its elemental symbols (\emph{glyphs}), each represented by a quad and typeset (using additional kerning data or monospace) on the CPU.
     Each glyph's coverage values are prerendered into a bitmap using, e.g., FreeType~\cite{freetype1996} or quadratic curve evaluation~\cite{Wallace2016}, and packed into a texture map.
     The GPU is then used to texture every glyph using its respective subregion within the texture map.
     This approach is feasible as long as the text is displayed at a fixed size in pixels.
@@ -21,44 +21,44 @@ Bitmap font
 Signed distance fields (\emph{SDF})
     representing the glyphs' shapes can be used to better account for varying display resolution as well as text size and orientation~\cite{Frisken2000}.
     Each distance function is sampled and encoded as a bitmap within the texture map.
-    The GPU can then reconstruct a glyph's shape at any orientation by interpolating bilinearily and thresholding the distances.
+    The GPU can then reconstruct a glyph's shape at any orientation by interpolating bilinearly and thresholding the distances.
     Furthermore, per-pixel screen-space derivatives can be used to properly anti-alias the glyph edges~\cite{Qin2006} and multiple texture channels, representing different edges intersecting within a texel, can be used in order to preserve sharp corners~\cite{Green2007}.
 
-Spline fragment-based sampling approaches are recently considered to fully overcome all limitations of the bitmap and SDF based approaches.
+Spline fragment-based sampling approaches were recently considered to fully overcome all limitations of the bitmap and SDF based approaches.
     Quadratic B\'ezier curve segments for every glyph are efficiently encoded in a texture.
-    This data is then decoded and locally super sampled per fragment on the fly \cite{Dobbie2016}.
+    This data is then decoded and locally supersampled per fragment on the fly \cite{Dobbie2016}.
     \enquote{It should be clear that [this approach] requires considerably more computation}~\cite{Lengyel2017} (and dependent texture lookups) in comparison to SDF.
     However, this approach is still fast enough to enable rendering of many labels in real-time while providing the most flexibility and best quality.
 
 \subsection{Text Rendering Systems}
 \noindent
-The presented API requires text to be placed and transformed in virtual two and three dimensional scenes. 
+The presented API requires text to be placed and transformed in virtual two- and three-dimensional scenes. 
 Text rendering facilities exposed via native GUI APIs such as \emph{Core Text}, \emph{Direct Write}, Windows \emph{GDI}, \emph{Qt}, \emph{X11}, or \emph{Xft} are usually tightly integrated into a framework or operating system. 
-For the most part, though supporting hardware acceleration, they cannot be used from within custom hardware accelerated contexts nor be non-trivially transformed.
+For the most part, though supporting hardware acceleration, they cannot be used from within custom hardware-accelerated contexts nor be non-trivially transformed.
  
-Font rendering libraries such as FreeType~\cite{freetype1996} are focussing on handling font faces, typesetting, and text rendering in 2D and can be used, e.g., to prerender glyphs to textures for hardware accelerated use.
+Font rendering libraries such as FreeType~\cite{freetype1996} are focusing on handling font faces, typesetting, and text rendering in 2D and can be used, e.g., to prerender glyphs to textures for hardware-accelerated use.
 One promising library for fast text rendering using OpenGL is \emph{freetype-gl}~\cite{freetypegl2011}; however, there are no means for advanced placement and arbitrary transformations yet.
 
 For web applications targeting browsers there is a similar lack of support. 
 Even though browsers have advanced text rendering capabilities, they are not fully exposed to developers.
 The rendering library \emph{three.js}~\cite{cabello2010} creates vertex-based geometry for text rendering (there are community examples showing SDF rendering that use three.js's text capabilities though) and suggests HTML or canvas rendering for the visual display of large amounts of text.
-With CSS 3 and HTML one could achieve adequate 2D and 3D transformed labeling by creating a pool of html text elements and changing their position and content dynamically~\cite{limberger2013}.
+With CSS 3 and HTML one could achieve adequate 2D and 3D transformed labeling by creating a pool of HTML text elements and changing their position and content dynamically~\cite{limberger2013}.
 This, however, does not allow for occlusion by the 3D scene (e.g., shared depth buffer) and yields inefficient rendering performance.
 
 \subsection{Labeling in Information Visualization} 
 \noindent
 OpenLL is intended as an extensible API covering various labeling approaches.
-Kakoulis and Tollis provide a good introduction and overview to labeling problems that were identified within the context of cartography and rendering maps~\cite{Kakoulis2013}.
+Kakoulis and Tollis provide a good introduction to and overview of labeling problems that were identified within the context of cartography and rendering maps~\cite{Kakoulis2013}.
 Labeling techniques can be categorized as internal or embedded~\cite{Maass2007}, external, boundary, and excentric labels~\cite{Oeltze-Jafra2014}.
 For their placement, various quality measures and requirements are commonly applied:
 (1) readability w.r.t. overlap, orientation, and occlusion with other graphical elements, 
-(2) unambiguity w.r.t. to the referenced/associated graphical element(s), 
+(2) unambiguity w.r.t. the referenced/associated graphical element(s), 
 (3) minimization of visual clutter, 
-(4) elegibility for dynamic placement in real-time,
-(5) temporal-coherency by means of reducing visual discontinuities, and, finally, their
+(4) eligibility for dynamic placement in real-time,
+(5) temporal coherence by means of reducing visual discontinuities, and, finally, their
 (6) compaction, i.e., the minimization of each individual layout area itself~\cite{Ali05}.
-In addition, problem and computation specific measures and constraints, e.g., attractive and repulsive forces~\cite{Balata2014} might be introduced.
+In addition, problem- and computation-specific measures and constraints, e.g., attractive and repulsive forces~\cite{Balata2014} might be introduced.
 
-A vast number of labeling placement techniques such as positioning names on maps~\cite{Imhof1975}, point feature label placement~\cite{Christensen1995}, external label management in 3D object space~\cite{Tatzgern2014}, or force-based labling~\cite{Vaaraniemi2012} have been introduced.
+A vast number of labeling placement techniques such as positioning names on maps~\cite{Imhof1975}, point feature label placement~\cite{Christensen1995}, external label management in 3D object space~\cite{Tatzgern2014}, or force-based labeling~\cite{Vaaraniemi2012} have been introduced.
 Furthermore, the labels themselves can be used as proxies for interaction as shown by, e.g., Balata et al.~\cite{Balata2014}.
 For the design of OpenLL this necessitates extension points that account for and embrace the diversity of application domains and labeling approaches.
