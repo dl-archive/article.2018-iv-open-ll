@@ -6,6 +6,8 @@
 
 DOI: [10.1109/iV.2018.00039](https://doi.org/10.1109/iV.2018.00039) · Author's version: Zenodo · [ResearchGate](https://www.researchgate.net/publication/327017928)
 
+Implementation: [cginternals/openll](https://github.com/cginternals/openll) (API specification, reference implementations) · [cginternals/openll-cpp](https://github.com/cginternals/openll-cpp) (C++ implementation)
+
 > Today's rendering APIs lack robust functionality and capabilities for dynamic, real-time text rendering and labeling, which represent key requirements for 3D application design in many fields.
 > As a consequence, most rendering systems are barely or not at all equipped with respective capabilities.
 > This paper drafts the unified text rendering and labeling API OpenLL intended to complement common rendering APIs, frameworks, and transmission formats.
